@@ -1,0 +1,130 @@
+﻿@model MRAproject.Models.LoadRegisterUserViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LoadRegisterPerson</title>
+</head>
+<body>
+    <form method="get" action="LogOut">
+        <input type="submit" value="Logout" />
+    </form>
+        @if (!string.IsNullOrEmpty(Model.resultMessage))
+        {
+            <div>
+                @Model.resultMessage
+            </div>
+            <br />
+        }
+
+        @if (!Model.IsEditMode)
+        {
+
+            <form action="RegisterPerson" method="post">
+                <div>
+                    <label>name: </label>
+                    <input type="text" name="Name" />
+                </div>
+                <div>
+                    <label>lastname: </label>
+                    <input type="text" name="LastName" />
+                </div>
+                <div>
+                    <label>Phone: </label>
+                    <input type="text" name="Phone" />
+                </div>
+                <div>
+                    <label>EmailAddress: </label>
+                    <input type="text" name="EmailAddress" />
+                </div>
+                <div>
+                    <label>Caption: </label>
+                    <input type="text" name="Caption" />
+                </div>
+                <div>
+                    <input type="submit" value="Save" />
+                </div>
+            </form>
+
+        }
+        else
+        {
+            <form action="EditPerson" method="post">
+                <input type="hidden" name="ID" value="@Model.ID" />
+                <div>
+                    <label>name: </label>
+                    <input type="text" name="Name" value="@Model.Name" />
+                </div>
+                <div>
+                    <label>lastname: </label>
+                    <input type="text" name="LastName" value="@Model.LastName" />
+                </div>
+                <div>
+                    <label>birthdate: </label>
+                    <input type="text" name="Phone" value="@Model.Phone" />
+                </div>
+                <div>
+                    <label>username: </label>
+                    <input type="text" name="EmailAddress" value="@Model.EmailAddress" />
+                </div>
+                <div>
+                    <label>password: </label>
+                    <input type="text" name="Caption" value="@Model.Caption" />
+                </div>
+                <div>
+                    <input type="submit" value="Edit" />
+                </div>
+            </form>
+        }
+
+        <br />
+        <br />
+        <br />
+
+        @if (Model.Users != null && Model.Users.Count != 0)
+        {
+            <form action="Search" method="get">
+                <div>
+                    <label>Search tool</label>
+                    <input type="text" name="name" />
+                </div>
+                <div>
+                    <input type="submit" value="Search" />
+                </div>
+            </form>
+
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td>Last Name</td>
+                    <td>Username</td>
+                    <td>Delete</td>
+                    <td>Edit</td>
+                </tr>
+
+                @foreach (MRAproject.Models.User item in Model.Users)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.LastName</td>
+                        <td>@item.EmailAddress</td>
+                        <td>
+                            <a href="https://localhost:44390/Home/User/DeletePerson/@item.ID">Del</a>
+                        </td>
+                        <td>
+                            <a href="" https: //localhost:44390/Home/User/ChangeToEditPersonMode/@item.ID">Edit</a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
+
+</body>
+</html>

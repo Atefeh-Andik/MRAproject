@@ -1,0 +1,38 @@
+﻿@model MRAproject.Models.LoadLoginViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LoadLogin</title>
+</head>
+<body>
+    <form method="get" action="LogOut">
+        <input type="submit" value="Logout"/>
+    </form>
+    <br>
+    <h2>LogIn</h2>
+    @if(!string.IsNullOrEmpty(Model.Message))
+            {
+                <h4>@Model.Message</h4>
+            }
+    <form method="post" action="Login">
+        <div>
+            <label>UserName:</label>
+            <input type="text" name="UserName" />
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="text" name="Password" />
+        </div>
+        <div>
+            <input type="submit" value="Login" />
+        </div>
+    </form>
+</body>
+</html>
